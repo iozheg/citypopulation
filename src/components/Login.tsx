@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { Event } from '_debugger';
 import { ChangeEvent } from 'react';
+
+import { InputComponent } from './InputComponent';
 
 export interface LoginState {
     username: string;
     password: string;
+    register: boolean;
 }
 
 export class Login extends React.Component <{}, LoginState>{
@@ -12,7 +14,11 @@ export class Login extends React.Component <{}, LoginState>{
     constructor(props:any){
         super(props);
 
-    //    this.state = {        };
+        this.state = {
+            username: "",
+            password: "",
+            register: false
+        };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
@@ -32,7 +38,7 @@ export class Login extends React.Component <{}, LoginState>{
     }
 
     handleRegister(e: React.MouseEvent<HTMLButtonElement>): void{
-        alert("Want to");
+        this.setState({register: true});
         e.preventDefault();
     }
 
@@ -69,34 +75,6 @@ export class Login extends React.Component <{}, LoginState>{
                     </div>
                 </form>
             </div>
-        );
-    }
-}
-
-interface InputComponentProps {
-    name?: string;
-    type?: string;
-    placeholder?: string;
-    onChange?(value: string): void;
-}
-
-class InputComponent extends React.Component<InputComponentProps> {
-    constructor(props: InputComponentProps){
-        super(props);        
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-    handleChange(e: React.ChangeEvent<HTMLInputElement>): void{        
-        this.props.onChange(e.currentTarget.value);
-    }
-    render(){
-        return (
-            <input 
-                name={this.props.name} 
-                type={this.props.type}
-                placeholder={this.props.placeholder} 
-                onChange={this.handleChange} 
-                className="form-control" />
         );
     }
 }
