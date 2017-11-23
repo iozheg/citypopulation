@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ChangeEvent } from 'react';
 
 import { LoginForm } from './LoginForm';
+import { RegisterForm } from './RegisterForm';
 
 export interface LoginState{
     showLoginForm: boolean
@@ -42,7 +43,7 @@ export class Login extends React.Component <{}, LoginState>{
                         <a href="#"> Register </a> 
                     </li>
                 </ul>
-                <LoginForm />
+                {this.state.showLoginForm ? <LoginForm /> : <RegisterForm />}
             </div>
         );
     }
