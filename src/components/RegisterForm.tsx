@@ -29,7 +29,10 @@ export class RegisterForm extends React.Component<{},LoginFormState>{
     }
 
     handleRegister(e: React.MouseEvent<HTMLButtonElement>): void{
-    //    this.setState();
+        serverRequest('register', {
+                username: this.state.username,
+                password: this.state.password
+            });
         e.preventDefault();
     }
 
@@ -54,9 +57,34 @@ export class RegisterForm extends React.Component<{},LoginFormState>{
                     <button 
                         className="btn btn-primary pull-left"
                         type="submit" 
-                        onClick={this.handleRegister}> Register </button>
+                        onClick={e => this.handleRegister(e)}> Register </button>
                 </form>
             </div>
         );
     }
+}
+
+interface HttpRequest{
+    username?: string;
+    password?: string;
+}
+
+function serverRequest(type: string, request: HttpRequest): void{
+    let url: string;
+    let options = {
+        method: '',
+        headers: new Headers(),
+        body: ''
+    };
+
+    if(type === 'register'){
+        url = 'localhost/register';
+        options.method = 'POST';
+        options.headers = new Headers();  
+        options.body = `username=${request.username}&password=${request.password}`;
+    } else {
+        return;
+    }
+    fetch(url, options)
+        .then(response => console.log(response.status));
 }
