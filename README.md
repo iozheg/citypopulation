@@ -1,2 +1,0 @@
-# citypopulation
-test task
