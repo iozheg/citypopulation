@@ -2,19 +2,19 @@ import * as React from "react";
 
 import { InputComponent } from './InputComponent';
 
-export interface LoginState {
+export interface LoginFormState {
     username: string;
     password: string;
 }
 
-export class LoginForm extends React.Component<{},LoginState>{
+export class LoginForm extends React.Component<{},LoginFormState>{
 
     constructor(props:any){
         super(props);
 
         this.state = {
-            username: "",
-            password: "",
+            username: '',
+            password: '',
         };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -30,19 +30,14 @@ export class LoginForm extends React.Component<{},LoginState>{
     }
     
     handleLogin(e: React.MouseEvent<HTMLButtonElement>): void{
-        alert(this.state.username + " " + this.state.password);
-        e.preventDefault();
-    }
-
-    handleRegister(e: React.MouseEvent<HTMLButtonElement>): void{
-    //    this.setState();
+        alert(this.state.username + ' ' + this.state.password);
         e.preventDefault();
     }
 
     render(){
         return(
-            <div className="container text-center">
-            <h2>Login</h2>
+            <div className="text-center">
+            <h3>Login</h3>
             <form className="login-form">
                 <div className="form-group">
                     <InputComponent 
@@ -57,19 +52,10 @@ export class LoginForm extends React.Component<{},LoginState>{
                         type="password" 
                         onChange={this.handlePasswordChange} />
                 </div>
-                <div className="btn-group btn-group-justified">
-                    <div className="btn-group">
-                        <button 
-                            className="btn btn-primary"
-                            type="submit" 
-                            onClick={this.handleLogin}> Log in </button> 
-                    </div>
-                    <div className="btn-group">
-                        <button 
-                            className="btn btn-default"
-                            onClick={this.handleRegister}> Register </button>
-                    </div>               
-                </div>
+                <button 
+                    className="btn btn-primary pull-left"
+                    type="submit" 
+                    onClick={this.handleLogin}> Log in </button>                  
             </form>
         </div>
         );
