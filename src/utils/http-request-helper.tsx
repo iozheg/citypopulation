@@ -6,13 +6,11 @@ export interface HttpRequest{
 export function serverRequest(type: string, request: HttpRequest): Promise<string>{
     let url: string;
     let options = {
-        method: '',
+        method: 'POST',
         headers: new Headers(),
         body: ''
     };
 
-    options.method = 'POST';
-    options.headers = new Headers();
     options.headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     if(type === 'register'){
@@ -21,6 +19,10 @@ export function serverRequest(type: string, request: HttpRequest): Promise<strin
     } else if(type === 'login'){
         url = `http://localhost:4444/login/`;        
         options.body = `username=${request.username}&password=${request.password}`;
+    } else if(type === 'cities'){
+        options = null;
+        console.log('here');
+        url = `http://localhost:4444/cities/`;
     } else {
         return;
     }
