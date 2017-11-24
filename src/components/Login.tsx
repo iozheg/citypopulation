@@ -8,11 +8,17 @@ export interface LoginState{
     showLoginForm: boolean
 }
 
-export class Login extends React.Component <{}, LoginState>{   
+export interface LoginProps{
+    onLogin: ()=>void
+}
+
+export class Login extends React.Component <LoginProps, LoginState>{   
 
     constructor(props:any){
         super(props);
         this.state = {showLoginForm: true};
+
+        this.handleLoginSuccess = this.handleLoginSuccess.bind(this);
     }
 
     handleTabClick(e: React.MouseEvent<HTMLLIElement>): void{
@@ -22,6 +28,10 @@ export class Login extends React.Component <{}, LoginState>{
         } else {
             this.setState({showLoginForm: false});
         }
+    }
+
+    handleLoginSuccess(){
+        this.props.onLogin();
     }
 
     render(){
@@ -43,7 +53,9 @@ export class Login extends React.Component <{}, LoginState>{
                         <a href="#"> Register </a> 
                     </li>
                 </ul>
-                {this.state.showLoginForm ? <LoginForm /> : <RegisterForm />}
+                {this.state.showLoginForm 
+                    ? <LoginForm onLogin={this.handleLoginSuccess} /> 
+                    : <RegisterForm onLogin={this.handleLoginSuccess} />}
             </div>
         );
     }
