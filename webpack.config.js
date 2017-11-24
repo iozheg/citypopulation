@@ -11,7 +11,14 @@ module.exports = {
     devServer: {
         contentBase: '.',
         compress: true,
-        port: 4444        
+        port: 4444,
+        
+        proxy: {
+            '/register': {
+                target: 'http://localhost:4445',
+                secure: false
+            }
+        }
     },
 
     resolve: {
