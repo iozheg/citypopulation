@@ -1,20 +1,17 @@
 import * as React from "react";
 
 import { InputComponent } from './InputComponent';
+import { serverRequest } from '../utils/http-request-helper';
+import { LoginFormState, LoginFormProp } from './LoginForm'
 
-export interface LoginFormState {
-    username: string;
-    password: string;
-}
-
-export class RegisterForm extends React.Component<{},LoginFormState>{
+export class RegisterForm extends React.Component<LoginFormProp,LoginFormState>{
 
     constructor(props:any){
         super(props);
 
         this.state = {
             username: '',
-            password: '',
+            password: ''
         };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -32,7 +29,13 @@ export class RegisterForm extends React.Component<{},LoginFormState>{
         serverRequest('register', {
                 username: this.state.username,
                 password: this.state.password
-            });
+            })
+            .then(text =>{
+                    text === 'user logged in'
+                        ? this.props.onLogin()
+                        : false;
+                }
+            );
         e.preventDefault();
     }
 
@@ -62,29 +65,4 @@ export class RegisterForm extends React.Component<{},LoginFormState>{
             </div>
         );
     }
-}
-
-interface HttpRequest{
-    username?: string;
-    password?: string;
-}
-
-function serverRequest(type: string, request: HttpRequest): void{
-    let url: string;
-    let options = {
-        method: '',
-        headers: new Headers(),
-        body: ''
-    };
-
-    if(type === 'register'){
-        url = 'localhost/register';
-        options.method = 'POST';
-        options.headers = new Headers();  
-        options.body = `username=${request.username}&password=${request.password}`;
-    } else {
-        return;
-    }
-    fetch(url, options)
-        .then(response => console.log(response.status));
 }

@@ -1,13 +1,18 @@
 import * as React from "react";
 
 import { InputComponent } from './InputComponent';
+import { serverRequest } from "../utils/http-request-helper";
 
 export interface LoginFormState {
     username: string;
     password: string;
 }
 
-export class LoginForm extends React.Component<{},LoginFormState>{
+export interface LoginFormProp {
+    onLogin: ()=>void;
+}
+
+export class LoginForm extends React.Component<LoginFormProp,LoginFormState>{
 
     constructor(props:any){
         super(props);
@@ -30,7 +35,16 @@ export class LoginForm extends React.Component<{},LoginFormState>{
     }
     
     handleLogin(e: React.MouseEvent<HTMLButtonElement>): void{
-        alert(this.state.username + ' ' + this.state.password);
+        serverRequest('login', {
+            username: this.state.username,
+            password: this.state.password
+        })
+        .then( text =>{
+                text === 'user logged in'
+                    ? this.props.onLogin()
+                    : false;
+            }
+        );
         e.preventDefault();
     }
 
