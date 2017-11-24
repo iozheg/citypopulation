@@ -2,10 +2,10 @@ import hashlib
 import json
 
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import CityModel
@@ -30,6 +30,13 @@ def login_user(request):
             raise Http404("user or password incorrect!")
     except User.DoesNotExist:
         raise Http404("no such user!")
+
+@csrf_exempt
+@login_required(login_url='/')
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
 
 @csrf_exempt
 def register(request):
