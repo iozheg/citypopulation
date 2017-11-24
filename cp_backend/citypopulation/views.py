@@ -56,6 +56,7 @@ def get_cities(request):
         return HttpResponse(
             json.dumps(
                 [{
+                    'id': city.id,
                     'name':city.name,
                     'population':city.population
                 } for city in cities]
