@@ -21,7 +21,6 @@ export function serverRequest(type: string, request: HttpRequest): Promise<strin
         options.body = `username=${request.username}&password=${request.password}`;
     } else if(type === 'cities'){
         options = null;
-        console.log('here');
         url = `http://localhost:4444/cities/`;
     } else {
         return;
