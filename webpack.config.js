@@ -13,12 +13,11 @@ module.exports = {
         compress: true,
         port: 4444,
         
-        proxy: {
-            '/register': {
-                target: 'http://localhost:4445',
-                secure: false
-            }
-        }
+        proxy: [{
+            context:['/register', '/login', '/cities'],
+            target: 'http://localhost:4445',
+            secure: false
+        }]
     },
 
     resolve: {
