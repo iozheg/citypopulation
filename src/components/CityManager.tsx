@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CitiesTable } from "./CitiesTable";
+import { MapComponent } from "./Map";
 
 export class CityManager extends React.Component{
     constructor(props:any){
@@ -8,7 +9,11 @@ export class CityManager extends React.Component{
 
     render(){
         return(
-            <CitiesTable />
+            <div>
+                <CitiesTable />
+                <MapComponent />
+            </div>
+            
         );
     }
 }
