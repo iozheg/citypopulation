@@ -5,6 +5,7 @@ import { CityRow } from "./CityRow";
 
 export interface CitiesTableState{
     cities: [{
+        id: number,
         name: string,
         population: number
     }];
@@ -24,13 +25,12 @@ export class CitiesTable extends React.Component<{}, CitiesTableState>{
     }
 
     render(){
-        this.state != null && console.log(this.state.cities);
         return(
             <table className='table table-striped'>
                 <thead><tr><th>Город</th><th>Население</th></tr></thead>
                 <tbody>
                     {this.state != null && 
-                            this.state.cities.map(elem=><CityRow city={elem} />)
+                            this.state.cities.map(elem=><CityRow key={elem.id} city={elem} />)
                     }
                 </tbody>
             </table>
