@@ -4,23 +4,33 @@ import { YaMaps } from "../utils/yamaps";
 
 interface MapState{
     map: YaMaps;
+    selectedCity: string;
 }
 
-export class MapComponent extends React.Component<{}, MapState>{
+interface MapProps{
+    selectedCity: string;
+}
 
-    constructor(props:any){
+export class MapComponent extends React.Component<MapProps, MapState>{
+
+    constructor(props: MapProps){
         super(props);
 
-        this.state=null;
+        this.state={
+            map: null,
+            selectedCity: null
+        };
     }
 
-    componentDidMount(){        
+    componentDidMount(): void{        
         this.setState({map: new YaMaps('map')});
-        setTimeout(() => this.markCity(), 2000);
     }
 
-    markCity(){
-        this.state.map.setMark();
+    componentWillReceiveProps(nextProps: MapProps): void{
+        if(nextProps.selectedCity != this.props.selectedCity){
+            this.setState({selectedCity: nextProps.selectedCity});
+            this.state.map.setMark(nextProps.selectedCity);
+        }
     }
 
     render(){

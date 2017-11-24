@@ -11,18 +11,19 @@ export class YaMaps{
         });
     }
 
-    setMark(){
-        let city = 'Тюмень';
-        let geocode = ymaps.geocode(city);
+    setMark(cityName: string){
+        let geocode = ymaps.geocode(cityName);
         geocode.then((res:any) => {
             let coords = res.geoObjects.get(0).geometry.getCoordinates();
+            
             this.map.geoObjects.add(
                 new ymaps.Placemark(
                     coords,
-                    {hintContent: city}
+                    {hintContent: cityName}
                 )
             );
             this.map.setCenter(coords);
+            this.map.setZoom(7);
         });
     }
 }
