@@ -11,3 +11,8 @@
 a{
     outline: 0;
 }
+
+#map{
+    width: 600px;
+    height: 400px;
+}
