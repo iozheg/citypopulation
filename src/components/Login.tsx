@@ -11,7 +11,17 @@ export interface LoginState{
 export interface LoginProps{
     onLogin: ()=>void
 }
-
+/**
+ * Manages user login/register.
+ * 
+ * state:
+ *  @param {boolean} showLoginForm Shows which component render:
+ *      LoginForm or RegisterForm.
+ * 
+ * @export
+ * @class Login
+ * @extends {React.Component<LoginProps, LoginState>}
+ */
 export class Login extends React.Component <LoginProps, LoginState>{   
 
     constructor(props:any){

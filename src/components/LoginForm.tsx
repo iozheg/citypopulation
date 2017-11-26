@@ -3,16 +3,37 @@ import * as React from "react";
 import { InputComponent } from './InputComponent';
 import { serverRequest } from "../utils/http-request-helper";
 
+/**
+ * @param {string} username Entered username.
+ * @param {string} password Entered password.
+ * @param {string} error Error message from server.
+ * 
+ * @export
+ * @interface LoginFormState
+ */
 export interface LoginFormState {
     username: string;
     password: string;
     error: string;
 }
 
+/**
+ * @param {Function} onLogin Callback to notify if login succeed.
+ * 
+ * @export
+ * @interface LoginFormProp
+ */
 export interface LoginFormProp {
     onLogin: ()=>void;
 }
 
+/**
+ * Renders user login form.
+ * 
+ * @export
+ * @class LoginForm
+ * @extends {React.Component<LoginFormProp, LoginFormState>}
+ */
 export class LoginForm extends React.Component<LoginFormProp,LoginFormState>{
 
     constructor(props:any){

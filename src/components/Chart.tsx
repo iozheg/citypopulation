@@ -1,5 +1,10 @@
 import * as React from "react";
 
+/**
+ * @param {Array<{}>} cities Array of objects that represents cities.
+ * 
+ * @interface ChartProps
+ */
 interface ChartProps{
     cities: [{
         id: number,
@@ -8,14 +13,29 @@ interface ChartProps{
     }];
 }
 
+/**
+ * Manages chart.
+ * 
+ * Chart is drawn on canvas.
+ * Depending on received values we calculate chart limits on vertical
+ * axis, calculate horizontal step. Translate recieved values to values
+ * that will be shown on chart (chart's vertical axis starts not from
+ * 0 so we must translate values to new coord system.). Than calculate
+ * ratio of canvas height to char limits, this ration is needed to get
+ * position on canvas.
+ * 
+ * @export
+ * @class Chart
+ * @extends {React.Component<ChartProps, {}>}
+ */
 export class Chart extends React.Component<ChartProps, {}>{
 
     context: CanvasRenderingContext2D;
-    width: number;
-    height: number;
+    width: number;  // Canvas height.
+    height: number; // Canvas width.
     topChartLimit: number;
     bottomChartLimit: number;
-    dots: number[];
+    dots: number[]; // Translated to chart system values.
     horizontalStep: number;
     verticalRatio: number;
 
@@ -50,14 +70,20 @@ export class Chart extends React.Component<ChartProps, {}>{
         /** Vertical values in chart coord system */
         this.dots = cities.map(item => item.population-this.bottomChartLimit);
 
-        /** Horizontal step. 20 - offset from right border, so we leave some space left. */
+        /** Horizontal step. 20 - offset from right border, so we
+         * leave some space left. */
         this.horizontalStep = (this.width-20) / cities.length;
 
-        /** Vertical ratio */
+        /** Vertical ratio. This is needed to get position on canvas. */
         this.verticalRatio = this.height
                                 / (this.topChartLimit - this.bottomChartLimit);
     }
 
+    /**
+     * When React mounted component we draw chart to context.
+     * 
+     * @memberof Chart
+     */
     componentDidMount(): void{
         let canvas: HTMLCanvasElement;
         canvas = document.getElementById('chart') as HTMLCanvasElement;
@@ -122,10 +148,12 @@ export class Chart extends React.Component<ChartProps, {}>{
                 );
             this.context.restore();
 
+            /** Return to value position. */
             this.context.moveTo(
                         xPos, 
                         this.height-this.dots[i]*this.verticalRatio
                     );
+
             xPos += this.horizontalStep;
         }
     }

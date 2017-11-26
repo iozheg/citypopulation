@@ -4,6 +4,15 @@ import { MapComponent } from "./Map";
 import { Chart } from "./Chart";
 import { serverRequest } from "../utils/http-request-helper";
 
+/**
+ * @param {Array<{}>} cities Array of objects that represents cities.
+ * @param {string} selectedCity Name of selected by user city.
+ * @param {boolean} showChart At once only map or chart can be shown.
+ * @param {string} chartButtonTitle Button changes it's title in
+ *      depending on is chart shown or not.
+ * 
+ * @interface CityManagerState
+ */
 interface CityManagerState{
     cities: [{
         id: number,
@@ -15,6 +24,13 @@ interface CityManagerState{
     chartButtonTitle: string;
 }
 
+/**
+ * Manages displaying table of cities, map and chart.
+ * 
+ * @export
+ * @class CityManager
+ * @extends {React.Component<{}, CityManagerState>}
+ */
 export class CityManager extends React.Component<{}, CityManagerState>{
     constructor(props:any){
         super(props);
@@ -27,14 +43,32 @@ export class CityManager extends React.Component<{}, CityManagerState>{
         }
     }
 
+    /**
+     * This. component receives name of selected city from it's child.
+     * 
+     * @param {string} cityName 
+     * @memberof CityManager
+     */
     onCitySelected(cityName: string): void{
         this.setState({selectedCity: cityName});
     }
 
+    /**
+     * This component receives city list from it's child.
+     * This list is used to send it to chart.
+     * 
+     * @param {*} cities 
+     * @memberof CityManager
+     */
     citiesRecieved(cities: any){
         this.setState({cities: cities});
     }
 
+    /**
+     * Chart button handler.
+     * 
+     * @memberof CityManager
+     */
     drawChart(): void{
         this.setState({
             showChart: !this.state.showChart,
