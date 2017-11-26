@@ -17,7 +17,7 @@ def login_user(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
         except Exception:
-            raise Http404("username or password is not specified!")
+            return HttpResponse("username or password is not specified!")
 
     try:
         user = User.objects.get(username=username)
@@ -27,9 +27,9 @@ def login_user(request):
             login(request, user)
             return HttpResponse("user logged in")
         else:
-            raise Http404("user or password incorrect!")
+            return HttpResponse("user or password is incorrect!")
     except User.DoesNotExist:
-        raise Http404("no such user!")
+        return HttpResponse("no such user!")
 
 @csrf_exempt
 @login_required(login_url='/')
@@ -45,11 +45,11 @@ def register(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
         except Exception:
-            raise Http404("username or password is not specified!")
+            return HttpResponse("username or password is not specified!")
 
     try:
         user = User.objects.get(username=username)
-        return HttpResponse("user exists")
+        return HttpResponse("such user exists")
     except User.DoesNotExist:
         hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
         user = User.objects.create_user(username=username, password=hash)
