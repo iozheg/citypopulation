@@ -28,7 +28,7 @@ export function serverRequest(type: string, request: HttpRequest): Promise<strin
     } else if(type === 'login'){
         url = `http://localhost:4444/login/`;        
         options.body = `username=${request.username}&password=${request.password}`;
-    } else if(type === 'logoff'){
+    } else if(type === 'logout'){
         url = `http://localhost:4444/logout/`;
     } else if(type === 'cities'){
         options.method = 'GET';

@@ -38,12 +38,12 @@ export class App extends React.Component<{}, AppState>{
         this.setState({isLogged: true});
     }
     /**
-     * Handles logoff.
+     * Handles logout.
      * 
      * @memberof App
      */
-    logoff(){
-        serverRequest('logoff', {});
+    logout(){
+        serverRequest('logout', {});
         this.setState({isLogged: false});
     }
 
@@ -51,8 +51,8 @@ export class App extends React.Component<{}, AppState>{
         if(this.state.isLogged){
             return(
                 <div className="container">
-                    <button className="btn" onClick={e => this.logoff()}>
-                        Log off
+                    <button className="btn" onClick={e => this.logout()}>
+                        Log out
                     </button>            
                     <CityManager />
                 </div>
