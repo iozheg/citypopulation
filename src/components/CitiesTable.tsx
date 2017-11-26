@@ -14,6 +14,7 @@ export interface CitiesTableState{
 
 interface CitiesTableProps{
     onCitySelected: Function;
+    onCitiesRecieved: Function;
 }
 
 export class CitiesTable extends React.Component<CitiesTableProps, CitiesTableState>{
@@ -25,7 +26,12 @@ export class CitiesTable extends React.Component<CitiesTableProps, CitiesTableSt
 
     componentDidMount(): void{
         serverRequest('cities', {})
-            .then(obj => this.setState({cities: JSON.parse(obj)}));
+            .then(obj => this.recievedCities(obj));
+    }
+
+    recievedCities(obj: any){
+        this.setState({cities: JSON.parse(obj)});
+        this.props.onCitiesRecieved(this.state.cities);
     }
 
     handleRowClick(key: number): void{
@@ -43,8 +49,8 @@ export class CitiesTable extends React.Component<CitiesTableProps, CitiesTableSt
 
     render(){
         return(
-            <table className='table table-striped cities-table'>
-                <thead><tr><th>Город</th><th>Население</th></tr></thead>
+            <table className='table table-striped'>
+                <thead><tr><th>Город</th><th>Население (тыс. чел.)</th></tr></thead>
                 <tbody>
                     {this.state != null && 
                             this.state.cities.map(
