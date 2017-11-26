@@ -11,7 +11,8 @@ export class RegisterForm extends React.Component<LoginFormProp,LoginFormState>{
 
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            error: null
         };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -33,7 +34,7 @@ export class RegisterForm extends React.Component<LoginFormProp,LoginFormState>{
             .then(text =>{
                     text === 'user logged in'
                         ? this.props.onLogin()
-                        : false;
+                        : this.setState({error: text});
                 }
             );
         e.preventDefault();
@@ -44,6 +45,11 @@ export class RegisterForm extends React.Component<LoginFormProp,LoginFormState>{
             <div className="text-center">
                 <h3>Register</h3>
                 <form className="login-form">
+                    {this.state.error != null 
+                        && <div className="alert alert-danger" role="alert">
+                            {this.state.error}
+                        </div>
+                    }
                     <div className="form-group">
                         <InputComponent 
                             name="username" 

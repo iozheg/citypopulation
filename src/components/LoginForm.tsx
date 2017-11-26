@@ -6,6 +6,7 @@ import { serverRequest } from "../utils/http-request-helper";
 export interface LoginFormState {
     username: string;
     password: string;
+    error: string;
 }
 
 export interface LoginFormProp {
@@ -20,6 +21,7 @@ export class LoginForm extends React.Component<LoginFormProp,LoginFormState>{
         this.state = {
             username: '',
             password: '',
+            error: null
         };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -42,7 +44,7 @@ export class LoginForm extends React.Component<LoginFormProp,LoginFormState>{
         .then( text =>{
                 text === 'user logged in'
                     ? this.props.onLogin()
-                    : false;
+                    : this.setState({error: text});
             }
         );
         e.preventDefault();
@@ -53,6 +55,11 @@ export class LoginForm extends React.Component<LoginFormProp,LoginFormState>{
             <div className="text-center">
             <h3>Login</h3>
             <form className="login-form">
+                {this.state.error != null 
+                    && <div className="alert alert-danger" role="alert">
+                        {this.state.error}
+                    </div>
+                }
                 <div className="form-group">
                     <InputComponent 
                         name="username" 
