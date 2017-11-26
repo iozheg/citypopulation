@@ -26,7 +26,7 @@ export class CityRow extends React.Component<CityRowProps, {}>{
 
     render(){
         return(
-            <tr onClick={e => this.onClick()}>
+            <tr className="clickable" onClick={e => this.onClick()}>
                 <td>{this.props.city.name}</td>
                 <td>{this.props.city.population}</td>
             </tr>
