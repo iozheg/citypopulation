@@ -14,7 +14,7 @@ module.exports = {
         port: 4444,
         
         proxy: [{
-            context:['/register', '/login', '/cities'],
+            context:['/register', '/login', '/logout', '/cities'],
             target: 'http://localhost:4445',
             secure: false
         }]
