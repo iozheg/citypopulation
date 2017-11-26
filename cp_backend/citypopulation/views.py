@@ -56,7 +56,7 @@ def register(request):
         login(request, user)
         return HttpResponse("user logged in")
 
-#@login_required(login_url='/')
+@login_required(login_url='/')
 def get_cities(request):
     if request.method == 'GET':
         cities = CityModel.objects.all()
