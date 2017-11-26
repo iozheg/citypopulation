@@ -20,3 +20,15 @@ a{
 .cities-table{
     width: 400px;
 }
+
+.clickable{
+    cursor: pointer;
+}
+
+.clickable:hover{
+    color: red;
+}
+
+#chart{
+    _border: 1px solid black;
+}
