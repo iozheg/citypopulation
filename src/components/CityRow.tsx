@@ -14,7 +14,7 @@ export interface CityRowProps{
         name: string,
         population: number
     };
-    onClick: (id: number)=>void;
+    onClick: Function;
 }
 
 /**
