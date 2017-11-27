@@ -6,11 +6,11 @@ import * as React from "react";
  * @interface ChartProps
  */
 interface ChartProps{
-    cities: [{
+    cities: {
         id: number,
         name: string,
         population: number
-    }];
+    }[];
 }
 
 /**
@@ -30,6 +30,7 @@ interface ChartProps{
  */
 export class Chart extends React.Component<ChartProps, {}>{
 
+    canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
     width: number;  // Canvas height.
     height: number; // Canvas width.
@@ -85,9 +86,7 @@ export class Chart extends React.Component<ChartProps, {}>{
      * @memberof Chart
      */
     componentDidMount(): void{
-        let canvas: HTMLCanvasElement;
-        canvas = document.getElementById('chart') as HTMLCanvasElement;
-        this.context = canvas.getContext('2d');
+        this.context = this.canvas.getContext('2d');
         this.draw();
     }
 
@@ -160,7 +159,7 @@ export class Chart extends React.Component<ChartProps, {}>{
 
     render(){
         return(
-            <canvas id="chart" height={this.height} width={this.width} />
+            <canvas id="chart" ref={(canvas)=>this.canvas=canvas} height={this.height} width={this.width} />
         );
     }
 }
