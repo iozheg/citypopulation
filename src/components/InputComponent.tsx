@@ -3,6 +3,7 @@ import * as React from "react";
 export interface InputComponentProps {
     name?: string;
     type?: string;
+    value?: string;
     placeholder?: string;
     onChange?(value: string): void;
 }
@@ -19,10 +20,11 @@ export class InputComponent extends React.Component<InputComponentProps> {
     render(){
         return (
             <input 
-                name={this.props.name} 
+                name={this.props.name}
                 type={this.props.type}
-                placeholder={this.props.placeholder} 
-                onChange={this.handleChange} 
+                value={this.props.value}
+                placeholder={this.props.placeholder}
+                onChange={this.handleChange}
                 className="form-control" />
         );
     }

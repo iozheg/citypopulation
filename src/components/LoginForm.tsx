@@ -82,16 +82,18 @@ export class LoginForm extends React.Component<LoginFormProp,LoginFormState>{
                     </div>
                 }
                 <div className="form-group">
-                    <InputComponent 
-                        name="username" 
-                        placeholder="Username" 
+                    <InputComponent
+                        name="username"
+                        placeholder="Username"
+                        value={this.state.username}
                         onChange={this.handleNameChange} />
                 </div>
                 <div className="form-group">
-                    <InputComponent 
-                        name="password" 
-                        placeholder="Password" 
-                        type="password" 
+                    <InputComponent
+                        name="password"
+                        placeholder="Password"
+                        type="password"                        
+                        value={this.state.password}
                         onChange={this.handlePasswordChange} />
                 </div>
                 <button 
