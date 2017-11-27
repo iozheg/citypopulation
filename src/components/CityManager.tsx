@@ -24,6 +24,10 @@ interface CityManagerState{
     chartButtonTitle: string;
 }
 
+interface CityManagerProps{
+    requestHandler: Function;
+}
+
 /**
  * Manages displaying table of cities, map and chart.
  * 
@@ -31,7 +35,7 @@ interface CityManagerState{
  * @class CityManager
  * @extends {React.Component<{}, CityManagerState>}
  */
-export class CityManager extends React.Component<{}, CityManagerState>{
+export class CityManager extends React.Component<CityManagerProps, CityManagerState>{
     constructor(props:any){
         super(props);
         
@@ -44,24 +48,24 @@ export class CityManager extends React.Component<{}, CityManagerState>{
     }
 
     /**
-     * This. component receives name of selected city from it's child.
+     * When React mounts this component we make request to server to
+     * receive cities.
+     * 
+     * @memberof CityManager
+     */
+    componentDidMount(): void{
+        this.props.requestHandler('cities', {})
+            .then((obj:any) => this.setState({cities: JSON.parse(obj)}));
+    }
+
+    /**
+     * This component receives name of selected city from it's child.
      * 
      * @param {string} cityName 
      * @memberof CityManager
      */
     onCitySelected(cityName: string): void{
         this.setState({selectedCity: cityName});
-    }
-
-    /**
-     * This component receives city list from it's child.
-     * This list is used to send it to chart.
-     * 
-     * @param {*} cities 
-     * @memberof CityManager
-     */
-    citiesRecieved(cities: any){
-        this.setState({cities: cities});
     }
 
     /**
@@ -81,14 +85,14 @@ export class CityManager extends React.Component<{}, CityManagerState>{
             <div>                
                 <div className="row">
                     <div className="col-md-6">
-                        <CitiesTable 
-                            onCitySelected={
-                                (cityName: string) => this.onCitySelected(cityName)
-                            }
-                            onCitiesRecieved={
-                                (cities: any) => this.citiesRecieved(cities)
-                            }
-                        />
+                        {this.state.cities != null &&
+                            <CitiesTable 
+                                cities={this.state.cities}
+                                onCitySelected={
+                                    (cityName: string) => this.onCitySelected(cityName)
+                                }
+                            />
+                        }
                     </div>
                     <div className="col-md-6">
                         
