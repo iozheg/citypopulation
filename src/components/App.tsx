@@ -54,7 +54,7 @@ export class App extends React.Component<{}, AppState>{
                     <button className="btn" onClick={e => this.logout()}>
                         Log out
                     </button>            
-                    <CityManager />
+                    <CityManager requestHandler={serverRequest}/>
                 </div>
             );
         }
