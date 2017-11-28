@@ -12,8 +12,8 @@ import { mockCities } from './mocks';
 
 describe('<CityManager />', ()=>{
     beforeEach( ()=>{
-        let resolveFunction;
-        let fakeRequestHandler = function(...args){
+        let resolveFunction: Function;
+        let fakeRequestHandler = function(...args:any[]){
                         return new Promise(
                                 (resolve, reject) => resolveFunction=resolve
                             );
@@ -43,7 +43,7 @@ describe('<CityManager />', ()=>{
 
     it('shouldn\'t render a Map after button Chart was clicked', () => {
         this.wrapper.find('button').simulate('click');
-        expect(this.wrapper.find(Map)).toHaveLength(0);
+        expect(this.wrapper.find(MapComponent)).toHaveLength(0);
     });
 
     it('should have state.selectedCity after row of table was clicked', () => {
