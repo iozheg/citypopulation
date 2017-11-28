@@ -12,13 +12,13 @@ Webpack dev server uses localhost:4444, Django - localhost:4445.
 
 <h3>HOW TO USE</h3>
 <ol type='1'>
-<li>1. Create DB 'citypopulation'. Project uses 'alex' as login and password. You can change it in citypopulation\cp_backend\cp_backend\settings.py.</li>
-<li>2. in citypopulation/cp_backend run 'python3 manage.py makemigrations' than 'python3 manage.py migrate'.</li>
-<li>3. Drop table citypopulation_citymodel and import it from cities.sql.</li>
-<li>4. Run Django dev server by 'python3 manage.py runserver 4445'</li>
-<li>5. Run 'npm start'.</li>
+<li>Create DB 'citypopulation'. Project uses <code>'alex'</code> as login and password. You can change it in citypopulation\cp_backend\cp_backend\settings.py.</li>
+<li>In citypopulation/cp_backend run <code>'python3 manage.py makemigrations'</code> than <code>'python3 manage.py migrate'</code>.</li>
+<li>Drop table citypopulation_citymodel and import it from cities.sql.</li>
+<li>Run Django dev server by <code>'python3 manage.py runserver 4445'</code></li>
+<li>Run 'npm start'.</li>
 </ol>
-For tests run 'npm test' - frontend, 'python3 manage.py test' - for backend.
+For tests run <code>'npm test'</code> - frontend, <code>'python3 manage.py test'</code> - for backend.
 
 <h3>Screenshots</h3>
 <img src='https://github.com/iozheg/citypopulation/blob/master/screenshots/cp1.PNG'></img>
