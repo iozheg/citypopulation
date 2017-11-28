@@ -21,6 +21,6 @@ Webpack dev server uses localhost:4444, Django - localhost:4445.
 For tests run 'npm test' - frontend, 'python3 manage.py test' - for backend.
 
 <h3>Screenshots</h3>
-<img src='https://github.com/iozheg/citypopulation/blob/master/cp1.PNG'></img>
-<img src='https://github.com/iozheg/citypopulation/blob/master/cp2.PNG'></img>
-<img src='https://github.com/iozheg/citypopulation/blob/master/cp3.PNG'></img>
+<img src='https://github.com/iozheg/citypopulation/blob/master/screenshots/cp1.PNG'></img>
+<img src='https://github.com/iozheg/citypopulation/blob/master/screenshots/cp2.PNG'></img>
+<img src='https://github.com/iozheg/citypopulation/blob/master/screenshots/cp3.PNG'></img>
