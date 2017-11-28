@@ -6,9 +6,8 @@ export interface HttpRequest{
 /**
  * Handles app's requests to server.
  * 
- * @export
- * @param {string} type Type of request.
- * @param {HttpRequest} request Body of request.
+ * @param type Type of request.
+ * @param request Body of request.
  * @returns {Promise<string>} 
  */
 export function serverRequest(type: string, request: HttpRequest): Promise<string>{

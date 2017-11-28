@@ -1,29 +1,24 @@
 import * as React from "react";
 
 /**
- * @param {{}} city City for current row.
- * @param {Function} onClick Callback to send parent id of selected
- *      city.
+ * @param {{}} city 
+ * @param {Function} onClick 
  * 
  * @export
  * @interface CityRowProps
  */
 export interface CityRowProps{
+    /** City for current row. */
     city: {
         id: number,
         name: string,
         population: number
     };
+    /** Callback to send parent id of selected city. */
     onClick: Function;
 }
 
-/**
- * Renders table row.
- * 
- * @export
- * @class CityRow
- * @extends {React.Component<CityRowProps, {}>}
- */
+/** Renders table row. */
 export class CityRow extends React.Component<CityRowProps, {}>{
     
     id: number;

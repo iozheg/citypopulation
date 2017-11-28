@@ -1,11 +1,7 @@
 import * as React from "react";
 
-/**
- * @param {Array<{}>} cities Array of objects that represents cities.
- * 
- * @interface ChartProps
- */
 interface ChartProps{
+    /** Array of objects that represents cities. */
     cities: {
         id: number,
         name: string,
@@ -23,10 +19,6 @@ interface ChartProps{
  * 0 so we must translate values to new coord system.). Than calculate
  * ratio of canvas height to char limits, this ration is needed to get
  * position on canvas.
- * 
- * @export
- * @class Chart
- * @extends {React.Component<ChartProps, {}>}
  */
 export class Chart extends React.Component<ChartProps, {}>{
 
@@ -80,11 +72,7 @@ export class Chart extends React.Component<ChartProps, {}>{
                                 / (this.topChartLimit - this.bottomChartLimit);
     }
 
-    /**
-     * When React mounted component we draw chart to context.
-     * 
-     * @memberof Chart
-     */
+    /** When React mounted component we draw chart to context. */
     componentDidMount(): void{
         this.context = this.canvas.getContext('2d');
         this.draw();

@@ -4,23 +4,19 @@ import { MapComponent } from "./Map";
 import { Chart } from "./Chart";
 import { serverRequest } from "../utils/http-request-helper";
 
-/**
- * @param {Array<{}>} cities Array of objects that represents cities.
- * @param {string} selectedCity Name of selected by user city.
- * @param {boolean} showChart At once only map or chart can be shown.
- * @param {string} chartButtonTitle Button changes it's title in
- *      depending on is chart shown or not.
- * 
- * @interface CityManagerState
- */
 interface CityManagerState{
+    /** Array of objects that represents cities. */
     cities: [{
         id: number,
         name: string,
         population: number
     }];
+    /** Name of selected by user city. */
     selectedCity: string;
+    /** At once only map or chart can be shown. */
     showChart: boolean;
+    /** Button changes it\'s title in depending on is chart shown
+     * or not. */
     chartButtonTitle: string;
 }
 
@@ -28,13 +24,7 @@ interface CityManagerProps{
     requestHandler: Function;
 }
 
-/**
- * Manages displaying table of cities, map and chart.
- * 
- * @export
- * @class CityManager
- * @extends {React.Component<{}, CityManagerState>}
- */
+/** Manages displaying table of cities, map and chart. */
 export class CityManager extends React.Component<CityManagerProps, CityManagerState>{
     constructor(props:any){
         super(props);
@@ -50,29 +40,18 @@ export class CityManager extends React.Component<CityManagerProps, CityManagerSt
     /**
      * When React mounts this component we make request to server to
      * receive cities.
-     * 
-     * @memberof CityManager
      */
     componentDidMount(): void{
         this.props.requestHandler('cities', {})
             .then((obj:any) => this.setState({cities: JSON.parse(obj)}));
     }
 
-    /**
-     * This component receives name of selected city from it's child.
-     * 
-     * @param {string} cityName 
-     * @memberof CityManager
-     */
+    /** This component receives name of selected city from it's child. */
     onCitySelected(cityName: string): void{
         this.setState({selectedCity: cityName});
     }
 
-    /**
-     * Chart button handler.
-     * 
-     * @memberof CityManager
-     */
+    /** Chart button handler. */
     drawChart(): void{
         this.setState({
             showChart: !this.state.showChart,

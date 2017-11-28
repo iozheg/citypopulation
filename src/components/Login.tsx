@@ -4,23 +4,16 @@ import { LoginForm } from './LoginForm';
 import { RegisterForm } from './RegisterForm';
 
 export interface LoginState{
+    /** Shows which component render: LoginForm or RegisterForm. */
     showLoginForm: boolean
 }
 
 export interface LoginProps{
+    /** Callback to notify parent that login is successfull. */
     onLogin: ()=>void
 }
-/**
- * Manages user login/register.
- * 
- * state:
- *  @param {boolean} showLoginForm Shows which component render:
- *      LoginForm or RegisterForm.
- * 
- * @export
- * @class Login
- * @extends {React.Component<LoginProps, LoginState>}
- */
+
+/** Manages user login/register. */
 export class Login extends React.Component <LoginProps, LoginState>{   
 
     constructor(props:any){

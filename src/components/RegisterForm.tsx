@@ -4,13 +4,7 @@ import { InputComponent } from './InputComponent';
 import { serverRequest } from '../utils/http-request-helper';
 import { LoginFormState, LoginFormProp } from './LoginForm'
 
-/**
- * Renders user register form.
- * 
- * @export
- * @class RegisterForm
- * @extends {React.Component<LoginFormProp, LoginFormState>}
- */
+/** Renders user register form. */
 export class RegisterForm extends React.Component<LoginFormProp,LoginFormState>{
 
     constructor(props:any){

@@ -3,30 +3,17 @@ import * as React from "react";
 import { serverRequest } from "../utils/http-request-helper";
 import { CityRow } from "./CityRow";
 
-/**
- * @param {Function} onCitySelected Callback to notify when user
- *      selected city.
- * @param {Function} onCitiesRecieved Callback to notify when list
- *      of cities received.
- * 
- * @interface CitiesTableProps
- */
 interface CitiesTableProps{
     cities: {
         id: number,
         name: string,
         population: number
     }[];
+    /** Callback to notify when user selected city. */
     onCitySelected: Function;
 }
 
-/**
- * Manages the table of cities.
- * 
- * @export
- * @class CitiesTable
- * @extends {React.Component<CitiesTableProps, CitiesTableState>}
- */
+/** Manages the table of cities. */
 export class CitiesTable extends React.Component<CitiesTableProps, {}>{
     constructor(props: CitiesTableProps){
         super(props);
@@ -34,12 +21,7 @@ export class CitiesTable extends React.Component<CitiesTableProps, {}>{
         this.state = null;
     }
 
-    /**
-     * Send to parent selected city name.
-     * 
-     * @param {number} key 
-     * @memberof CitiesTable
-     */
+    /** Send to parent selected city name. */
     handleRowClick(key: number): void{
         this.props.onCitySelected(this.getCityNameById(key));
     }
@@ -61,12 +43,12 @@ export class CitiesTable extends React.Component<CitiesTableProps, {}>{
                 </tr></thead>
                 <tbody>
                     {this.props.cities.map(
-                                elem=><CityRow 
-                                        key={elem.id}
-                                        city={elem}
-                                        onClick={(e:any) => this.handleRowClick(e)}
-                                    />
-                            )
+                            elem=><CityRow 
+                                    key={elem.id}
+                                    city={elem}
+                                    onClick={(e:number) => this.handleRowClick(e)}
+                                />
+                        )
                     }
                 </tbody>
             </table>
